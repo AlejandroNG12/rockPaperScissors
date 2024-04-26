@@ -1,0 +1,85 @@
+body{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    background-image: linear-gradient(to left,rgb(162, 162, 243), rgb(215, 228, 255)) ;
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.button_container{
+    display: flex;
+    justify-content: center;
+}
+h1{
+    font-size: 50px;
+    
+}
+button{
+    font-size: 30px;
+    font-weight: bold;
+    font-family:fantasy;
+    border: 2px solid rgb(79, 79, 243);
+    width: 200px;
+    height: 50px;
+    margin: 20px;
+    background-image:  linear-gradient(to right,rgb(162, 162, 243), rgb(215, 228, 255));
+    border-radius: 5px;
+
+}
+#rock:before{
+    content: "ROCK";
+}
+#rock:hover::before{
+    content: "\1FAA8";
+}
+#paper:before{
+    content: "PAPER";
+}
+#paper:hover::before{
+    content: "\1F9FB";
+}
+#scissors:before{
+    content: "SCISSORS";
+}
+#scissors:hover::before{
+    content: "✂️";
+}
+
+#result{
+    display: flex;
+    justify-content: center;
+
+}
+.choices{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#player,#computer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-family: fantasy;
+    font-size: larger;
+}
+#player_choice,#computer_choice{
+    display: flex;
+    margin: 20px 50px;
+    font-size: 35px;
+    font-weight: bold;
+    font-family:fantasy;
+    border: 2px solid rgb(79, 79, 243);
+    width: 200px;
+    height: 200px;
+    background-image:  linear-gradient(to right,rgb(162, 162, 243), rgb(215, 228, 255));
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    
+}

@@ -13,7 +13,11 @@ let computerWins = 0;
 const rockBtn = document.querySelector("#rock");
 const paperBtn = document.querySelector("#paper");
 const scissorsBtn = document.querySelector("#scissors");
-const div = document.querySelector("#result");
+const result = document.querySelector("#result");
+const player_div = document.querySelector("#player_choice");
+const computer_div = document.querySelector("#computer_choice");
+const player_points = document.querySelector("#player_points");
+const computer_points = document.querySelector("#computer_points");
 
 rockBtn.addEventListener("click",() => playOneRound(ROCK,getComputerChoice()));
 paperBtn.addEventListener("click",() =>playOneRound(PAPER,getComputerChoice()));
@@ -28,56 +32,96 @@ function getComputerChoice(){
 
 function playOneRound(playerSelection, computerSelection){
     if(playerSelection === ROCK && computerSelection === ROCK){
-        div.textContent = "You have tied!";
+        result.textContent = "You have tied!";
+        showChoices(ROCK,ROCK);
     }
     else if(playerSelection === ROCK && computerSelection === PAPER){
-        div.textContent = "You lose! ".concat(paperWin);
+        result.textContent = "You lose! ".concat(paperWin);
         computerWins++;
+        showChoices(ROCK,PAPER);
     }
     else if(playerSelection === ROCK && computerSelection === SCISSORS){
-        div.textContent = "You win! ".concat(rockWin);
+        result.textContent = "You win! ".concat(rockWin);
         playerWins++;
+        showChoices(ROCK,SCISSORS);
     }
     else if(playerSelection === PAPER && computerSelection === ROCK){
-        div.textContent = "You win! ".concat(paperWin);
+        result.textContent = "You win! ".concat(paperWin);
         playerWins++;
+        showChoices(PAPER,ROCK);
     }
     else if(playerSelection === PAPER && computerSelection === PAPER){
-        div.textContent = "You have tied!";
+        result.textContent = "You have tied!";
+        showChoices(PAPER,PAPER);
     }
     else if(playerSelection === PAPER && computerSelection === SCISSORS){
-        div.textContent = "You lose! ".concat(rockWin);
+        result.textContent = "You lose! ".concat(scissorsWin);
         computerWins++;
+        showChoices(PAPER,SCISSORS);
     }
     else if(playerSelection === SCISSORS && computerSelection === ROCK){
-        div.textContent = "You lose! ".concat(rockWin);
+        result.textContent = "You lose! ".concat(rockWin);
         computerWins++;
+        showChoices(SCISSORS,ROCK);
     }
     else if(playerSelection === SCISSORS && computerSelection === PAPER){
-        div.textContent = "You win! ".concat(scissorsWin);
+        result.textContent = "You win! ".concat(scissorsWin);
         playerWins++;
-        
+        showChoices(SCISSORS,PAPER);
     }
     else if(playerSelection === SCISSORS && computerSelection === SCISSORS){
-        div.textContent = "You have tied!";
+        result.textContent = "You have tied!";
+        showChoices(SCISSORS,SCISSORS);
     }
     gamesCount++;
+    player_points.textContent = playerWins;
+    computer_points.textContent = computerWins;
     if (gamesCount === 5) {
+        showWinner();
 
     }
 
     
 }
-function playGame(){
-    while (gamesCount<5){
-        playerSelection = prompt("Rock, paper or scissors?");
-        let cchoice = getComputerChoice();
-        let round = playOneRound(playerSelection,cchoice);
-        console.log(cchoice);
-        console.log(round);
-        gamesCount++;
-        if (gamesCount === 5) askPlayAgain(); 
+function showChoices(pChoice, cChoice){
+    if(pChoice === ROCK && cChoice === ROCK){
+        player_div.textContent =  "\uD83E\uDEA8";
+        computer_div.textContent = "\uD83E\uDEA8";
+    }else if(pChoice === ROCK && cChoice === PAPER){
+        player_div.textContent =  "\uD83E\uDEA8";
+        computer_div.textContent = "\uD83E\uDDFB";
+    }else if(pChoice === ROCK && cChoice === SCISSORS){
+        player_div.textContent =  "\uD83E\uDEA8";
+        computer_div.textContent = "\u2702\uFE0F";
+    }else if(pChoice === PAPER && cChoice === ROCK){
+        player_div.textContent =  "\uD83E\uDDFB";
+        computer_div.textContent = "\uD83E\uDEA8";
+    }else if(pChoice === PAPER && cChoice === PAPER){
+        player_div.textContent =  "\uD83E\uDDFB";
+        computer_div.textContent = "\uD83E\uDDFB";
+    }else if(pChoice === PAPER && cChoice === SCISSORS){
+        player_div.textContent =  "\uD83E\uDDFB";
+        computer_div.textContent = "\u2702\uFE0F";
+    }else if(pChoice === SCISSORS && cChoice === ROCK){
+        player_div.textContent =  "\u2702\uFE0F";
+        computer_div.textContent = "\uD83E\uDEA8";
+    }else if(pChoice === SCISSORS && cChoice === PAPER){
+        player_div.textContent =  "\u2702\uFE0F";
+        computer_div.textContent = "\uD83E\uDDFB";
+    }else if(pChoice === SCISSORS && cChoice === SCISSORS){
+        player_div.textContent =  "\u2702\uFE0F";
+        computer_div.textContent = "\u2702\uFE0F";
     }
+}
+function showWinner(){
+    if(playerWins > computerWins) {
+        result.textContent = "You win. Congratulation! 🎉";
+    }
+    else if(computerWins > playerWins){
+        result.textContent = "You lose. A computer is better than you hahaha";
+    }
+    else 
+        result.textContent = "Wow, you tied!"
 }
 
 function askPlayAgain(){
