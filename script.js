@@ -18,6 +18,8 @@ const player_div = document.querySelector("#player_choice");
 const computer_div = document.querySelector("#computer_choice");
 const player_points = document.querySelector("#player_points");
 const computer_points = document.querySelector("#computer_points");
+const result_container = document.querySelector("#result_container");
+let rst_button = undefined;
 
 rockBtn.addEventListener("click",() => playOneRound(ROCK,getComputerChoice()));
 paperBtn.addEventListener("click",() =>playOneRound(PAPER,getComputerChoice()));
@@ -81,9 +83,9 @@ function playOneRound(playerSelection, computerSelection){
 
     }
 
-    
 }
 function showChoices(pChoice, cChoice){
+    
     if(pChoice === ROCK && cChoice === ROCK){
         player_div.textContent =  "\uD83E\uDEA8";
         computer_div.textContent = "\uD83E\uDEA8";
@@ -112,22 +114,39 @@ function showChoices(pChoice, cChoice){
         player_div.textContent =  "\u2702\uFE0F";
         computer_div.textContent = "\u2702\uFE0F";
     }
+    result.style.background = null
+}
+function secCounter(second){
+    result.textContent = second;
 }
 function showWinner(){
+
     if(playerWins > computerWins) {
         result.textContent = "You win. Congratulation! 🎉";
+        result.style.background = "rgb(0,255,0)";
+
     }
     else if(computerWins > playerWins){
         result.textContent = "You lose. A computer is better than you hahaha";
+        result.style.background = "rgb(255,0,0)";
     }
-    else 
-        result.textContent = "Wow, you tied!"
+    else {
+        result.textContent = "Wow, you tied!";
+    }
+    rst_button = document.createElement("button");
+    rst_button.textContent = "NEW GAME";
+    rst_button.addEventListener("click", () => resetGame ());
+    result_container.appendChild(rst_button);    
 }
 
-function askPlayAgain(){
-    let response = prompt("Do you want to play again? (Yes/No)");
-    response = response.toLowerCase();
-    if(response === "yes") gamesCount = 0;
+function resetGame(){
+    gamesCount = 0;
+    player_div.textContent = "PLAYER";
+    computer_div.textContent = "COMPUTER";
+    player_points.textContent = "0";
+    computer_points.textContent = "0";
+    playerWins = 0;
+    computerWins = 0;
+    result_container.removeChild(rst_button);
+    result.textContent = null;
 }
-//console.log(computerSelection);
-//console.log(playOneRound(playerSelection,computerSelection));

@@ -45,13 +45,15 @@ button{
 #scissors:before{
     content: "SCISSORS";
 }
-#scissors:hover::before{
+#scissors:hover:before{
     content: "✂️";
 }
 
-#result{
+#result_container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 
 }
 .choices{
